@@ -1,3 +1,6 @@
-﻿using OrderFlow.Infrustructure.Data;
+﻿
+Console.WriteLine("attitude is everything !!!!");
 
-AppDbContext context = new AppDbContext(@"Server=.;Database=Week12-OrderFlowDb;Integrated Security=True;TrustServerCertificate=True;");
+
+
+Console.ReadKey();

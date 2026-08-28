@@ -5,9 +5,10 @@ using OrderFlow.Domain.Entities;
 
 namespace OrderFlow.Infrustructure.Data
 {
-    public class AppDbContext(string connectionString) : DbContext
+    public class AppDbContext : DbContext
     {
-        private readonly string _connectionString = connectionString;
+        private readonly string _connectionString =
+            @"Server=.;Database=Week12-OrderFlowDb;Integrated Security=True;TrustServerCertificate=True;";
 
         public DbSet<Customer> customers { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -30,8 +31,11 @@ namespace OrderFlow.Infrustructure.Data
             modelBuilder.Entity<Customer>()
                 .Property(x => x.Email)
                 .IsRequired()
-                .IsUnicode()
                 .HasMaxLength(150);
+
+            modelBuilder.Entity<Customer>()
+                .HasIndex(x => x.Email)
+                .IsUnique(); 
 
             modelBuilder.Entity<Product>()
            .Property(x => x.Name)
