@@ -9,7 +9,7 @@ namespace OrderFlow.Domain.Entities
         public bool IsPaid { get; set; }
 
 
-        public List<OrderItems> OrderItems { get; set; } = [];
+        public List<OrderItem> OrderItems { get; set; } = [];
         public Customer Customer { get; set; }
     }
 }

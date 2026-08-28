@@ -8,6 +8,6 @@ namespace OrderFlow.Domain.Entities
         public decimal Price { get; set; }
         public bool Stock { get; set; }
 
-        public List<OrderItems> OrderItems { get; set; } = [];
+        public List<OrderItem> OrderItems { get; set; } = [];
     }
 }
