@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="OrderFlow.Console/OrderFlow.Console.csproj" Id="a8ea2c30-9d0d-41b0-8c26-14a6c9f466dc" />
   <Project Path="OrderFlow.Domain/OrderFlow.Domain.csproj" />
   <Project Path="OrderFlow.Infrustructure/OrderFlow.Infrustructure.csproj" Id="3810d4e5-8276-41fc-ae75-e677953623ba" />
 </Solution>

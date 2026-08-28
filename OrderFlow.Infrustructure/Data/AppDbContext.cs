@@ -24,13 +24,14 @@ namespace OrderFlow.Infrustructure.Data
         {
             modelBuilder.Entity<Customer>()
                 .Property(x => x.Fullname)
+                .HasMaxLength(100)
                 .IsRequired();
 
             modelBuilder.Entity<Customer>()
                 .Property(x => x.Email)
                 .IsRequired()
                 .IsUnicode()
-                .HasMaxLength(100);
+                .HasMaxLength(150);
 
             modelBuilder.Entity<Product>()
            .Property(x => x.Name)
