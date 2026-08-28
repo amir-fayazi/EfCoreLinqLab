@@ -20,5 +20,52 @@ namespace OrderFlow.Infrustructure.Data
         }
 
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>()
+                .Property(x => x.Fullname)
+                .IsRequired();
+
+            modelBuilder.Entity<Customer>()
+                .Property(x => x.Email)
+                .IsRequired()
+                .IsUnicode()
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<Product>()
+           .Property(x => x.Name)
+           .IsRequired()
+           .HasMaxLength(120);
+
+            modelBuilder.Entity<Product>()
+                .Property(x => x.Price)
+                .HasColumnType("decimal(18,2)");
+
+            //------------------relation
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(c => c.Orders)
+                .WithOne(o => o.Customer)
+                .HasForeignKey(o => o.CustomerId);
+
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.OrderItems)
+                .WithOne(oi => oi.Order)
+                .HasForeignKey(or => or.OrderId);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(p => p.OrderItems)
+                .WithOne(or => or.Product)
+                .HasForeignKey(or => or.ProductId);
+
+            //-----------------------Constraint
+            modelBuilder.Entity<OrderItem>()
+                .HasIndex(x => new { x.OrderId, x.ProductId })
+                .IsUnique();
+
+
+            
+        }
+
     }
 }
