@@ -59,5 +59,23 @@ namespace OrderFlow.Infrustructure.Repositories
         {
             return _context.Orders.Any(x => x.CustomerId == customerId && !x.IsPaid);
         }
+
+        public List<Order> GetPaidOrdersByCustomerId(int customerId)
+        {
+            return [.. _context.Orders.Where(x => x.CustomerId == customerId && x.IsPaid)];
+        }
+
+        public int GetTotalItemsSold()
+        {
+            return _context.OrderItems.Sum(x => x.Quantity);
+        }
+
+        public List<int> GetOrderIdsContainingProduct(int productId)
+        {
+            return [.. _context.OrderItems
+                .Where(x => x.ProductId == productId)
+                .Select(item => item.OrderId)
+                ];
+        }
     }
 }

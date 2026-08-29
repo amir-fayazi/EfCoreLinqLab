@@ -14,5 +14,10 @@ namespace OrderFlow.Domain.Contracts
         bool HasUnpaidOrder(int customerId);
         decimal GetTotalRevenue();
         decimal GetRevenueByOrderId(int orderId);
+        List<Order> GetPaidOrdersByCustomerId(int customerId);
+
+        int GetTotalItemsSold();
+
+        List<int> GetOrderIdsContainingProduct(int productId);
     }
 }

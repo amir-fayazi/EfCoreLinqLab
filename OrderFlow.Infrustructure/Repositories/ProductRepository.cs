@@ -56,5 +56,20 @@ namespace OrderFlow.Infrustructure.Repositories
                 .Where(x => x.Stock > 0)
                 .Select(x => x.Name)];
         }
+
+        public List<Product> GetProductsInPriceRange(decimal minPrice, decimal maxPrice)
+        {
+            return [.. _context.Products.Where(x => x.Price > minPrice && x.Price < maxPrice)];
+        }
+
+        public bool HasProductMoreExpensiveThan(decimal price)
+        {
+            return _context.Products.Any(x => x.Price > price);
+        }
+
+        public List<string> GetOutOfStockProductNames()
+        {
+            return [.. _context.Products.Where(x => x.Stock == 0).Select(item => item.Name)];
+        }
     }
 }
