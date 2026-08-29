@@ -9,7 +9,8 @@ namespace OrderFlow.Domain.Contracts
         List<Product> GetProductsNeverOrdered();
         List<Product> GetProductsLowStock(int threshold);
         List<Product> GetTopSellingProducts(int count);
-
-        
+        List<Product> GetProductsMoreExpensiveThan(decimal price);
+        bool HasAnyOutOfStockProduct();
+        List<string> GetProductNamesInStock();
     }
 }

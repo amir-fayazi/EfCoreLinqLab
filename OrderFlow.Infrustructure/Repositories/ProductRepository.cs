@@ -22,6 +22,11 @@ namespace OrderFlow.Infrustructure.Repositories
             return _context.Products.Where(x => x.Stock < threshold).ToList();
         }
 
+        public List<Product> GetProductsMoreExpensiveThan(decimal price)
+        {
+            return [.. _context.Products.Where(x => x.Price > price)];
+        }
+
         public List<Product> GetProductsNeverOrdered()
         {
            return _context.Products.Where(x => !x.OrderItems.Any()).ToList();
@@ -39,8 +44,17 @@ namespace OrderFlow.Infrustructure.Repositories
                 .Take(count)
                 .Select(x => x.Product)
                 .ToList();
+        }
 
-
+        public bool HasAnyOutOfStockProduct()
+        {
+            return _context.Products.Any(x => x.Stock == 0);
+        }
+        public List<string> GetProductNamesInStock()
+        {
+            return [.._context.Products
+                .Where(x => x.Stock > 0)
+                .Select(x => x.Name)];
         }
     }
 }

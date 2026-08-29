@@ -32,10 +32,32 @@ namespace OrderFlow.Infrustructure.Repositories
                 })];
         }
 
+        public List<Order> GetOrdersWithMoreThanItems(int itemCount)
+        {
+            return [.. _context.Orders.Where(x => x.OrderItems.Count > itemCount)];
+        }
+
+        public decimal GetTotalRevenue()
+        {
+            return _context.OrderItems.Sum(item => item.Quantity * item.UnitPrice);
+
+
+        }
+        public decimal GetRevenueByOrderId(int orderId)
+        {
+            return _context.OrderItems
+                    .Where(x => x.OrderId == orderId)
+                    .Sum(x => x.Quantity * x.UnitPrice);
+        }
+
         public List<Order> GetUnpaidOrders()
         {
             return [.. _context.Orders.Where(x => !x.IsPaid)];
         }
 
+        public bool HasUnpaidOrder(int customerId)
+        {
+            return _context.Orders.Any(x => x.CustomerId == customerId && !x.IsPaid);
+        }
     }
 }
